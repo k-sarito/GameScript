@@ -17,7 +17,6 @@ const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
 };
 firebase.initializeApp(firebaseConfig);
-console.log(firebaseConfig)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
