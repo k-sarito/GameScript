@@ -1,0 +1,1 @@
+export const rawgAPI = "f3a56c4e17374c4e80a2587f8fb5fbf9"
