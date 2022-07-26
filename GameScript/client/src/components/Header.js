@@ -17,39 +17,7 @@ export default function Header({ isLoggedIn, getLoggedInUser }) {
 
   
 
-  const navArr = [
-    <>
-      <NavItem>
-        <NavLink tag={RRNavLink} to="/">
-         Home
-        </NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink tag={RRNavLink} to="/category">
-         Category Management
-        </NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink tag={RRNavLink} to="users">
-         Users
-        </NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink tag={RRNavLink} to="/tag">
-          Tag Manager
-        </NavLink>
-      </NavItem>
-    </>,
-    <>
-      <NavItem>
-        <NavLink tag={RRNavLink} to="/">
-        Home
-        </NavLink>
-      </NavItem>
-    </>
-    
-
-  ]
+  
 
   return (
     <div>
@@ -67,6 +35,11 @@ export default function Header({ isLoggedIn, getLoggedInUser }) {
                     <NavLink tag={RRNavLink} to="/">
                     Home
                     </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="games">
+                    Games
+                  </NavLink>
                 </NavItem>
             </>
               

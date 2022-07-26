@@ -31,6 +31,7 @@ namespace GameScript
         {
 
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<IGameRepository, GameRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
