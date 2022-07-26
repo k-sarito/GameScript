@@ -21,5 +21,12 @@ namespace GameScript.Controllers
         {
             return Ok(_gameRepository.GetAllByUserId(userId));
         }
+
+        [HttpPost]
+        public IActionResult Post(Game game)
+        {
+            _gameRepository.Add(game);
+            return CreatedAtAction(nameof(Post), game);
+        }
     }
 }

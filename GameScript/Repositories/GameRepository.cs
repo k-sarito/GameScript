@@ -49,5 +49,33 @@ namespace GameScript.Repositories
                 }
             }
         }
+
+        public void Add(Game game)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Game (UserId, RawgGameId, Name, PercentComplete, Released, Image, Rating, Metacritic, Playtime, Esrb, CurrentThoughts)
+                        OUTPUT INSERTED.ID
+                        VALUES (@UserId, @RawgGameId, @Name, @PercentComplete, @Released, @Image, @Rating, @Metacritic, @Playtime, @Esrb, @CurrentThoughts)";
+                    DbUtils.AddParameter(cmd, "@UserId", game.UserId);
+                    DbUtils.AddParameter(cmd, "@RawgGameId", game.RawgGameId);
+                    DbUtils.AddParameter(cmd, "@Name", game.Name);
+                    DbUtils.AddParameter(cmd, "@PercentComplete", game.PercentComplete);
+                    DbUtils.AddParameter(cmd, "@Released", game.Released);
+                    DbUtils.AddParameter(cmd, "@Image", game.Image);
+                    DbUtils.AddParameter(cmd, "@Rating", game.Rating);
+                    DbUtils.AddParameter(cmd, "@Metacritic", game.Metacritic);
+                    DbUtils.AddParameter(cmd, "@Playtime", game.Playtime);
+                    DbUtils.AddParameter(cmd, "@Esrb", game.Esrb);
+                    DbUtils.AddParameter(cmd, "@CurrentThoughts", game.CurrentThoughts);
+
+                    game.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
     }
 }

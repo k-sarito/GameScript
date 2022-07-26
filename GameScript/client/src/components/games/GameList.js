@@ -5,15 +5,18 @@ import { getAllGamesByUserId } from "../../modules/gameManager";
 
 export const GameList = ({getLoggedInUser}) => {
     const [games, setGames] = useState([])
-    const [currentUser, setCurrentUser] = useState({})
 
     const getUserGames = (userId) => {
         getAllGamesByUserId(userId)
             .then(res => setGames(res))
     }
 
+    
+
     useEffect(()=> {
-        setCurrentUser(getLoggedInUser)
-        console.log(currentUser)
+        getLoggedInUser()
+        .then(res => getUserGames(res.id))
     }, [])
+
+    
 }

@@ -6,5 +6,6 @@ namespace GameScript.Repositories
     public interface IGameRepository
     {
         List<Game> GetAllByUserId(int userId);
+        void Add(Game game);
     }
 }
