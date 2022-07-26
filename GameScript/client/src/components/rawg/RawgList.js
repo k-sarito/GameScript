@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { getAllRawgGames, getRawgByGenre, getRawgByPlatform, getRawgTopRated, getRawgUpcoming, rawgSearch } from "../../modules/rawgManager";
+import { addGame } from "../../modules/gameManager";
 import { RawgCard } from "./RawgCard";
 import {Container, Row, Col, Button} from "reactstrap";
 import {CardColumns} from "reactstrap";
@@ -12,6 +13,8 @@ export const RawgList = ({getLoggedInUser}) => {
     const [search, setSearch] = useState({
         searchField : ''
     })
+
+    const currentUserId = getLoggedInUser().then(res => res.id)
 
     const getGames = () => {
         getAllRawgGames().then(res => setGames(res.results));
@@ -43,6 +46,24 @@ export const RawgList = ({getLoggedInUser}) => {
         setSearch(searchCopy)
     }
 
+    const handleSaveGame = (gameObj) => {
+        const gameCopy = {...gameObj}
+        let gameToAdd = {
+            userId : currentUserId,
+            rawgGameId : gameCopy.id,
+            name : gameCopy.name,
+            percentComplete : 0,
+            released : gameCopy.released,
+            image : gameCopy.background_image,
+            rating : gameCopy.rating,
+            metacritic : gameCopy.metacritic,
+            playtime : gameCopy.playtime,
+            esrb : gameCopy.esrb_rating?.name,
+            currentThoughts: 'Nothing yet'
+        }
+        addGame(gameToAdd)
+    }
+
     
 
     useEffect(() => {
@@ -58,7 +79,7 @@ export const RawgList = ({getLoggedInUser}) => {
                     <Button onClick={() => searchGames(search.searchField)}>Go</Button>
                     <CardColumns>
                         <Row>                    
-                            {games.map(game => <RawgCard game={game} key={game.id}/>)}                    
+                            {games.map(game => <RawgCard game={game} key={game.id} handleSaveGame={handleSaveGame}/>)}                    
                         </Row>
                     </CardColumns>
                 </div>

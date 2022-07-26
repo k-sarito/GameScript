@@ -14,7 +14,7 @@ export default function ApplicationViews({ isLoggedIn, getLoggedInUser }) {
         <Route path="/">
           <Route
               index
-              element={isLoggedIn ? <RawgList /> : <Navigate to="/login" />}
+              element={isLoggedIn ? <RawgList getLoggedInUser={getLoggedInUser} /> : <Navigate to="/login" />}
             />
           <Route path="games" element={<GameList getLoggedInUser={getLoggedInUser}/>}/>
           <Route path="login" element={<Login />} />

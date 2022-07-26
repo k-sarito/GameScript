@@ -23,10 +23,10 @@ namespace GameScript.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Game game)
+        public IActionResult Add(Game game)
         {
             _gameRepository.Add(game);
-            return CreatedAtAction(nameof(Post), game);
+            return Ok(game);
         }
     }
 }
