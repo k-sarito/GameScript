@@ -80,6 +80,46 @@ namespace GameScript.Repositories
             }
         }
 
+        public Game GetById(int id)
+        {
+            using (var conn= Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, UserId, RawgGameId, Name, PercentComplete, Released, Image, Rating, Metacritic, Playtime, Esrb, CurrentThoughts 
+                        FROM Game
+                        WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    Game game = null;
+                    var reader = cmd.ExecuteReader();
+
+                    if(reader.Read())
+                    {
+                        game = new Game()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            RawgGameId = DbUtils.GetInt(reader, "RawgGameId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            PercentComplete = DbUtils.GetInt(reader, "PercentComplete"),
+                            Released = DbUtils.GetDateTime(reader, "Released"),
+                            Image = DbUtils.GetString(reader, "Image"),
+                            Rating = reader.GetDecimal(reader.GetOrdinal("Rating")),
+                            Metacritic = DbUtils.GetInt(reader, "Metacritic"),
+                            Playtime = DbUtils.GetInt(reader, "Playtime"),
+                            Esrb = DbUtils.GetString(reader, "Esrb"),
+                            CurrentThoughts = DbUtils.GetString(reader, "CurrentThoughts")
+                        };
+                    }
+                    reader.Close();
+                    return game;
+                }
+            }
+        }
+
         public void Update(Game game)
         {
             using (var conn = Connection)

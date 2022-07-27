@@ -14,3 +14,8 @@ export const addGame = (gameObj) => {
         body: JSON.stringify(gameObj)
     })
 }
+
+export const getGameById = (id) => {
+    return fetch(`${baseUrl}/Details/${id}`)
+        .then(res=> res.json())
+}

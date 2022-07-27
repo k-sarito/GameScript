@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import {Card, CardBody, CardTitle, CardImg, CardText, Col, Collapse, Progress } from "reactstrap";
+import { useNavigate } from "react-router-dom";
+import {Card, CardBody, CardTitle, CardImg, CardText, Col, Collapse, Progress, Button } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faPenToSquare, faStarHalfStroke, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "../games/GameCard.css"
 
 export const GameCard = ({game}) => {
     const [expand, setExpand] = useState(false)
@@ -26,6 +28,11 @@ export const GameCard = ({game}) => {
                         <CardText>Released: {game.released}</CardText>
                         <CardText>Metacritic: {game.metacritic}</CardText>
                         <CardText>ESRB: {game.esrb}</CardText>
+                        <div className="gameCard--icons">
+                            <FontAwesomeIcon icon={faPenToSquare}/>
+                            <FontAwesomeIcon icon={faStarHalfStroke}/>
+                            <FontAwesomeIcon icon={faTrash}/>
+                        </div>
                     </Collapse>
                 </CardBody>
             </Card>        

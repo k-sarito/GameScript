@@ -22,6 +22,17 @@ namespace GameScript.Controllers
             return Ok(_gameRepository.GetAllByUserId(userId));
         }
 
+        [HttpGet("Details/{id}")]
+        public IActionResult GetGameById(int id)
+        {
+            var game = _gameRepository.GetById(id);
+            if(game == null)
+            {
+                return NotFound();
+            }
+            return Ok(game);
+        }
+
         [HttpPost]
         public IActionResult Add(Game game)
         {
