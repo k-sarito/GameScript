@@ -13,8 +13,11 @@ export const RawgList = ({getLoggedInUser}) => {
     const [search, setSearch] = useState({
         searchField : ''
     })
+    const [currentUser, setCurrentUser] = useState({})
 
-    const currentUserId = getLoggedInUser().then(res => res.id)
+    useEffect(() => {
+        getLoggedInUser().then(res => setCurrentUser(res))
+    }, [])
 
     const getGames = () => {
         getAllRawgGames().then(res => setGames(res.results));
@@ -49,7 +52,7 @@ export const RawgList = ({getLoggedInUser}) => {
     const handleSaveGame = (gameObj) => {
         const gameCopy = {...gameObj}
         let gameToAdd = {
-            userId : currentUserId,
+            userId : currentUser.id,
             rawgGameId : gameCopy.id,
             name : gameCopy.name,
             percentComplete : 0,

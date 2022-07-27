@@ -75,6 +75,8 @@ namespace GameScript.Repositories
 
                     game.Id = (int)cmd.ExecuteScalar();
                 }
+
+                conn.Close();
             }
         }
     }
