@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getGameById } from "../../modules/gameManager";
+import { getGameById, updateProgress } from "../../modules/gameManager";
 import { Slider, FormControl, MenuItem, InputLabel, Select, Typography } from "@mui/material";
-import { Card, CardImg, CardBody, CardTitle } from "reactstrap";
+import { Card, CardImg, CardBody, CardTitle, Button } from "reactstrap";
 
 export const EditProgress = () => {
     const [game, setGame] = useState({})
@@ -11,23 +11,41 @@ export const EditProgress = () => {
         progress_slider : 0
     })
     const [newThoughts, setNewThoughts] = useState('')
-    const gameId = useParams()
+    const {gameId} = useParams()
 
 
     useEffect(() => {
         getGameById(gameId).then(res => setGame(res))
     }, [])
 
-    handleProgressChange = (event) => {
+    const handleProgressChange = (event) => {
         const progressCopy = {...newProgress}
         progressCopy[event.target.id] = event.target.value
         setNewProgress(progressCopy)
     }
 
-    handleThoughtsChange = (event) => {
-        const thoughtsCopy = {...newThoughts}
-        thoughtsCopy[event.target.id] = event.target.value
-        setNewThoughts(thoughtsCopy)
+    const handleThoughtsChange = (event) => {
+        setNewThoughts(event.target.value)
+    }
+
+    const handleUpdateGame = (gameObj) => {
+        
+        const gameCopy = {...gameObj}
+        let gameToUpdate = {
+            id : gameCopy.id,
+            userId : gameCopy.userId,
+            rawgGameId : gameCopy.rawgGameId,
+            name : gameCopy.name,
+            percentComplete : newProgress.progress_slider,
+            released : gameCopy.released,
+            image : gameCopy.image,
+            rating : gameCopy.rating,
+            metacritic : gameCopy.metacritic,
+            playtime : gameCopy.playtime,
+            esrb : gameCopy.esrb,
+            currentThoughts: newThoughts
+        }
+        updateProgress(gameToUpdate)
     }
 
     return (
@@ -55,9 +73,10 @@ export const EditProgress = () => {
                                 <MenuItem value={"Not Loving It"}>Not Loving It</MenuItem>
                                 <MenuItem value={"Meh"}>Meh</MenuItem>
                                 <MenuItem value={"Liking It"}>Liking It</MenuItem>
-                                <MenuItem value={"Loving It!"}>Loving It</MenuItem>
+                                <MenuItem value={"Loving It!"}>Loving It!</MenuItem>
                             </Select>
                     </FormControl>
+                    <Button color="success" onClick={() => handleUpdateGame(game)} block>Update</Button>
                 </CardBody>
             </Card>            
         </>

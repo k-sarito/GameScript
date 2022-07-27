@@ -120,7 +120,7 @@ namespace GameScript.Repositories
             }
         }
 
-        public void Update(Game game)
+        public void UpdateProgress(Game game)
         {
             using (var conn = Connection)
             {
@@ -132,6 +132,7 @@ namespace GameScript.Repositories
                                         WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@percentComplete", game.PercentComplete);
                     cmd.Parameters.AddWithValue("@currentThoughts", game.CurrentThoughts);
+                    cmd.Parameters.AddWithValue("@id", game.Id);
                     cmd.ExecuteNonQuery();
                 }
                 conn.Close();

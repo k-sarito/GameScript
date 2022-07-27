@@ -7,6 +7,7 @@ import "../games/GameCard.css"
 
 export const GameCard = ({game}) => {
     const [expand, setExpand] = useState(false)
+    const navigate = useNavigate()
 
     const toggleDetails = () => {
         if(expand == false){
@@ -14,6 +15,10 @@ export const GameCard = ({game}) => {
         } else {
             setExpand(false)
         }
+    }
+
+    const handleDetailNavigate = (id) => {
+        navigate(`details/${id}`)
     }
     return (
         <Col sm="6">
@@ -29,7 +34,9 @@ export const GameCard = ({game}) => {
                         <CardText>Metacritic: {game.metacritic}</CardText>
                         <CardText>ESRB: {game.esrb}</CardText>
                         <div className="gameCard--icons">
-                            <FontAwesomeIcon icon={faPenToSquare}/>
+                            <Button onClick={() => handleDetailNavigate(game.id)}>
+                                <FontAwesomeIcon icon={faPenToSquare} />
+                            </Button>
                             <FontAwesomeIcon icon={faStarHalfStroke}/>
                             <FontAwesomeIcon icon={faTrash}/>
                         </div>

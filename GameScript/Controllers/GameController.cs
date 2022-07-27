@@ -26,10 +26,6 @@ namespace GameScript.Controllers
         public IActionResult GetGameById(int id)
         {
             var game = _gameRepository.GetById(id);
-            if(game == null)
-            {
-                return NotFound();
-            }
             return Ok(game);
         }
 
@@ -38,6 +34,17 @@ namespace GameScript.Controllers
         {
             _gameRepository.Add(game);
             return Ok(game);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, Game game)
+        {
+            if (id != game.Id)
+            {
+                return BadRequest();
+            }
+            _gameRepository.UpdateProgress(game);
+            return NoContent();
         }
     }
 }

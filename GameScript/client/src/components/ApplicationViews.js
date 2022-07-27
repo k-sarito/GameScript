@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import { RawgList } from "./rawg/RawgList";
 import { GameList } from "./games/GameList";
+import { EditProgress } from "./games/EditProgress";
 
 
 
@@ -16,6 +17,7 @@ export default function ApplicationViews({ isLoggedIn, getLoggedInUser }) {
               index
               element={isLoggedIn ? <RawgList getLoggedInUser={getLoggedInUser} /> : <Navigate to="/login" />}
             />
+          <Route path="games/details/:gameId" element={<EditProgress/>}/>
           <Route path="games" element={<GameList getLoggedInUser={getLoggedInUser}/>}/>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />

@@ -7,7 +7,7 @@ namespace GameScript.Repositories
     {
         List<Game> GetAllByUserId(int userId);
         void Add(Game game);
-        void Update(Game game);
+        void UpdateProgress(Game game);
         Game GetById(int id);
     }
 }
