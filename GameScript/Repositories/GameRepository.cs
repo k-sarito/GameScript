@@ -79,5 +79,23 @@ namespace GameScript.Repositories
                 conn.Close();
             }
         }
+
+        public void Update(Game game)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Game
+                                        SET PercentComplete=@percentComplete, CurrentThoughts=@currentThoughts
+                                        WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@percentComplete", game.PercentComplete);
+                    cmd.Parameters.AddWithValue("@currentThoughts", game.CurrentThoughts);
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+            }
+        }
     }
 }
