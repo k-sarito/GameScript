@@ -1,4 +1,5 @@
 ﻿using System;
+using GameScript.Models;
 
 namespace GameScript.Models
 {
@@ -16,6 +17,6 @@ namespace GameScript.Models
         public string Name { get; set; }
         public string Esrb { get; set; }
         public string CurrentThoughts { get; set; }
-
+        public Review Review { get; set; }
     }
 }

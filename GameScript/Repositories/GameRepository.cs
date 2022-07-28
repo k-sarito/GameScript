@@ -18,8 +18,9 @@ namespace GameScript.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, UserId, RawgGameId, Name, PercentComplete, Released, Image, Rating, Metacritic, Playtime, Esrb, CurrentThoughts 
-                        FROM Game
+                        SELECT g.Id, g.UserId, g.RawgGameId, g.Name, g.PercentComplete, g.Released, g.Image, g.Rating, g.Metacritic, g.Playtime, g.Esrb, g.CurrentThoughts, r.Id AS ReviewId 
+                        FROM Game as g
+                        LEFT JOIN Review as r ON r.GameId = g.Id
                         WHERE UserId = @id";
                     DbUtils.AddParameter(cmd, "@id", userId);
                     var reader = cmd.ExecuteReader();
@@ -27,7 +28,7 @@ namespace GameScript.Repositories
 
                     while (reader.Read())
                     {
-                        games.Add(new Game()
+                        Game game = new Game()                        
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             UserId = DbUtils.GetInt(reader, "UserId"),
@@ -41,7 +42,15 @@ namespace GameScript.Repositories
                             Playtime = DbUtils.GetInt(reader, "Playtime"),
                             Esrb = DbUtils.GetString(reader, "Esrb"),
                             CurrentThoughts = DbUtils.GetString(reader, "CurrentThoughts")
-                        });
+                        };
+                        if (!reader.IsDBNull(reader.GetOrdinal("ReviewId")))
+                        {
+                            game.Review = new Review()
+                            {
+                                Id = DbUtils.GetInt(reader, "ReviewId")
+                            };
+                        }
+                        games.Add(game);
                     }
 
                     reader.Close();
