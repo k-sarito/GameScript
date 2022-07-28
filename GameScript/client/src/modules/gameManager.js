@@ -27,5 +27,5 @@ export const updateProgress = (gameObj) => {
             "Content-Type" : "application/json"
         },
         body: JSON.stringify(gameObj)
-    }).then(res => res.json())
+    })
 } 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {Card, CardBody, CardTitle, CardImg, CardText, Col, Collapse, Progress, Button } from "reactstrap";
+import {Card, CardBody, CardTitle, CardImg, CardText, Col, Collapse, Progress, Button, Badge } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faPenToSquare, faStarHalfStroke, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../games/GameCard.css"
@@ -17,6 +17,23 @@ export const GameCard = ({game}) => {
         }
     }
 
+    const badgeGenerator = (thoughts) => {
+        let jsx = ''
+        if(thoughts == "Nothing yet"){
+            jsx = <Badge color="dark" pill>{game.currentThoughts}</Badge>
+        } else if(thoughts == "Not Loving It"){
+            jsx = <Badge color="warning" pill>{game.currentThoughts}</Badge>
+        } else if(thoughts == "Meh"){
+            jsx = <Badge color="secondary" pill>{game.currentThoughts}</Badge>
+        } else if(thoughts == "Liking It"){
+            jsx = <Badge color="info" pill>{game.currentThoughts}</Badge>
+        } else if(thoughts == "Loving It!"){
+            jsx = <Badge color="primary" pill>{game.currentThoughts}</Badge>
+        }
+
+        return jsx
+    }
+
     const handleDetailNavigate = (id) => {
         navigate(`details/${id}`)
     }
@@ -26,6 +43,9 @@ export const GameCard = ({game}) => {
                 <CardImg top width="100%" src={game.image} alt="cover image"/>
                 <CardBody>
                     <CardTitle>{game.name}</CardTitle>
+                    <CardText>
+                        {badgeGenerator(game.currentThoughts)}
+                    </CardText>
                     <Progress value={game.percentComplete}/>
                     <FontAwesomeIcon icon={faAngleDown} onClick={() => toggleDetails()} />
                     <Collapse isOpen={expand}>
