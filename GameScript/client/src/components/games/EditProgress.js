@@ -26,7 +26,7 @@ export const EditProgress = () => {
     }
 
     const handleNavigate = () => {
-        navigate("games")
+        navigate("/games")
     }
 
     const handleUpdateGame = (gameObj) => {
@@ -47,7 +47,7 @@ export const EditProgress = () => {
             currentThoughts: newThoughts
         }
         updateProgress(gameToUpdate)
-        navigate("games")
+        navigate("/games")
     }
 
     return (
