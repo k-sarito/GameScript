@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {Card, CardBody, CardTitle, CardImg, CardText, Col, Collapse, Progress, Button, Badge } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faPenToSquare, faStarHalfStroke, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faPenToSquare, faStarHalfStroke, faTrash, faStar } from "@fortawesome/free-solid-svg-icons";
 import "../games/GameCard.css"
 
 export const GameCard = ({game}) => {
@@ -34,6 +34,26 @@ export const GameCard = ({game}) => {
         return jsx
     }
 
+    const handleReviewCreateNav = (id) => {
+        navigate(`/review/create/${id}`)
+    }
+
+    const reviewButtonGenerator = (review) => {
+        let jsx = ''
+        if(review != null){
+            jsx = 
+            <Button>
+                <FontAwesomeIcon icon={faStar}/>
+            </Button>
+        } else {
+            jsx = 
+            <Button onClick={() => handleReviewCreateNav(game.id)}>
+                <FontAwesomeIcon icon={faStarHalfStroke}/>
+            </Button>
+        }
+        return jsx
+    }
+
     const handleDetailNavigate = (id) => {
         navigate(`details/${id}`)
     }
@@ -57,7 +77,7 @@ export const GameCard = ({game}) => {
                             <Button onClick={() => handleDetailNavigate(game.id)}>
                                 <FontAwesomeIcon icon={faPenToSquare} />
                             </Button>
-                            <FontAwesomeIcon icon={faStarHalfStroke}/>
+                            {reviewButtonGenerator(game.review)}
                             <FontAwesomeIcon icon={faTrash}/>
                         </div>
                     </Collapse>

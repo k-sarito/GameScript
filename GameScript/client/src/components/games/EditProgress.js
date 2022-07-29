@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getGameById, updateProgress } from "../../modules/gameManager";
-import { Slider, FormControl, MenuItem, InputLabel, Select, Typography, Container, Box } from "@mui/material";
+import { Slider, FormControl, MenuItem, InputLabel, Select, Container} from "@mui/material";
 import { Card, CardImg, CardBody, CardTitle, Button } from "reactstrap";
 
 export const EditProgress = () => {
