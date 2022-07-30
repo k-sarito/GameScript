@@ -6,6 +6,7 @@ import { RawgList } from "./rawg/RawgList";
 import { GameList } from "./games/GameList";
 import { EditProgress } from "./games/EditProgress";
 import { ReviewForm } from "./reviews/ReviewForm";
+import { ReviewDetials } from "./reviews/ViewReview";
 
 
 
@@ -21,6 +22,7 @@ export default function ApplicationViews({ isLoggedIn, getLoggedInUser }) {
           <Route path="games/details/:gameId" element={<EditProgress/>}/>
           <Route path="games" element={<GameList getLoggedInUser={getLoggedInUser}/>}/>
           <Route path="review/create/:gameId" element={<ReviewForm/>}/>
+          <Route path="review/details/:gameId" element={<ReviewDetials/>}/>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           

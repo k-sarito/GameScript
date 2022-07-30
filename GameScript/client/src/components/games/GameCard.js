@@ -38,11 +38,15 @@ export const GameCard = ({game}) => {
         navigate(`/review/create/${id}`)
     }
 
+    const handleReviewDetailsNav = (id) => {
+        navigate(`/review/details/${id}`)
+    }
+
     const reviewButtonGenerator = (review) => {
         let jsx = ''
         if(review != null){
             jsx = 
-            <Button>
+            <Button onClick={() => handleReviewDetailsNav(game.id)}>
                 <FontAwesomeIcon icon={faStar}/>
             </Button>
         } else {
