@@ -32,7 +32,6 @@ export const ReviewDetials = () => {
                                 <OutlinedInput
                                     readOnly
                                     // label="Price"
-                                    label={null}
                                     id="price"
                                     value={review.userPurchasePrice}
                                     defaultValue={review.userPurchasePrice}
@@ -94,9 +93,9 @@ export const ReviewDetials = () => {
                                     <Slider 
                                         aria-labelledby="story_slider"
                                         valueLabelDisplay="auto"
-                                        value={review.story}
-                                        disabled
-                                        defaultValue={review.story}
+                                        value={parseInt(review.story)}
+                                        // disabled
+                                        // defaultValue={review.story}
                                         size="small"
                                         id="story"
                                         step={1}
@@ -111,11 +110,11 @@ export const ReviewDetials = () => {
                                     id="content"
                                     fullWidth
                                     value={review.content}
-                                    label="Additional Thoughts"
+                                    // label="Additional Thoughts"
                                     multiline
                                     rows={5}
                                     defaultValue={review.content}
-                                    disabled
+                                    aria-readonly
                                 />
                             </Grid>
                             <Grid item xs={4}>
