@@ -41,6 +41,11 @@ export default function Header({ isLoggedIn, getLoggedInUser }) {
                     Games
                   </NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="groups">
+                    Groups
+                  </NavLink>
+                </NavItem>
             </>
               
             )}
