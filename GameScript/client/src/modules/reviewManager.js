@@ -16,7 +16,7 @@ export const addReview = (reviewObj) => {
 }
 
 export const updateReview = (reviewObj) => {
-    return fetch(`${baseUrl}`, {
+    return fetch(`${baseUrl}/${reviewObj.id}`, {
         method: "PUT",
         headers: {
             "Content-Type" : "application/json"
