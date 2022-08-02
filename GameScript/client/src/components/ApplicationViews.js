@@ -20,17 +20,17 @@ export default function ApplicationViews({ isLoggedIn, getLoggedInUser }) {
           <Route
               index
               element={isLoggedIn ? <RawgList getLoggedInUser={getLoggedInUser} /> : <Navigate to="/login" />}
-            />
-          <Route path="games/details/:gameId" element={<EditProgress/>}/>
-          <Route path="games" element={<GameList getLoggedInUser={getLoggedInUser}/>}/>
-          <Route path="review/create/:gameId" element={<ReviewForm/>}/>
-          <Route path="review/details/:gameId" element={<ReviewDetials/>}/>
-          <Route path="review/edit/:gameId" element={<ReviewEdit/>}/>
-          <Route path="groups" element={<GroupList/>}/>
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          />
+            <Route path="games/details/:gameId" element={<EditProgress/>}/>
+            <Route path="games" element={<GameList getLoggedInUser={getLoggedInUser}/>}/>
+            <Route path="review/create/:gameId" element={<ReviewForm/>}/>
+            <Route path="review/details/:gameId" element={<ReviewDetials/>}/>
+            <Route path="review/edit/:gameId" element={<ReviewEdit/>}/>
+            <Route path="groups" element={<GroupList/>}/>
           
         </Route>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Routes>
     </main>
   );

@@ -95,7 +95,7 @@ namespace GameScript.Repositories
             }
         }
 
-        public void AddUser(int userId, int groupId)
+        public void AddUser(int groupId, int userId)
         {
             using (var conn = Connection)
             {

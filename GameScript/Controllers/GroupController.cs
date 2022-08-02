@@ -51,11 +51,11 @@ namespace GameScript.Controllers
             return Ok(group);
         }
 
-        [HttpPost("Join")]
+        [HttpPost("Join/{groupId}")]
         public IActionResult JoinGroup(int groupId)
         {
-            var userProfileId = GetCurrentUserProfile().Id;
-            _groupRepository.AddUser(groupId, userProfileId);
+            //var userProfileId = GetCurrentUserProfile().Id;
+            _groupRepository.AddUser(groupId, GetCurrentUserProfile().Id);
             return NoContent();
         }
     }

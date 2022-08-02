@@ -30,19 +30,18 @@ export const AddGroup = (groupObj) => {
                 "Content-Type" : "application/json"
             },
             body: JSON.stringify(groupObj)
-        })
+        }).then(res => res.json())
     })
 }
 
 export const JoinGroup = (groupId) => {
     return getToken().then(token => {
-        return fetch(`${baseUrl}/Join`, {
+        return fetch(`${baseUrl}/Join/${groupId}`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type" : "application/json"
-            },
-            body: JSON.stringify(groupId)
+            }            
         })
     })
 }

@@ -12,13 +12,7 @@ export const ReviewEdit = () => {
     const {gameId} = useParams()
     const navigate = useNavigate()
 
-    const [checked, setChecked] = useState(false)
-    const [price, setPrice] = useState('')
-    const [platform, setPlatform] = useState('')
-    const [playtime, setPlaytime] = useState('')
-    const [graphics, setGraphics] = useState('')
-    const [story, setStory] = useState('')
-    const [content, setContent] = useState('')
+    
 
     useEffect(() => {
         getGameById(gameId).then(res => setGame(res))
@@ -31,48 +25,62 @@ export const ReviewEdit = () => {
     // ? WHY does the update function automatically switch the state of Checked when unclicked?
 
     const handleSwitch = (event) => {
-        setChecked(event.target.checked)
+        let reviewCopy = {...review}
+        reviewCopy.completed = event.target.value
+        setReview(reviewCopy)
     }
 
     const handlePrice = (event) => {
-        setPrice(event.target.value)
+        let reviewCopy = {...review}
+        reviewCopy.userPurchasePrice = event.target.value
+        setReview(reviewCopy)
     }
 
     const handlePlatform = (event) => {
-        setPlatform(event.target.value)
+        let reviewCopy = {...review}
+        reviewCopy.userPlatform = event.target.value
+        setReview(reviewCopy)
     }
 
     const handlePlaytime = (event) => {
-        setPlaytime(event.target.value)
+        let reviewCopy = {...review}
+        reviewCopy.userPlaytime = event.target.value
+        setReview(reviewCopy)
     }
 
     const handleGraphics = (event) => {
-        setGraphics(event.target.value)
+        let reviewCopy = {...review}
+        reviewCopy.graphics = event.target.value
+        setReview(reviewCopy)
     }
 
     const handleStory = (event) => {
-        setStory(event.target.value)
+        let reviewCopy = {...review}
+        reviewCopy.story = event.target.value
+        setReview(reviewCopy)
     }
 
     const handleContent = (event) => {
-        setContent(event.target.value)
+        let reviewCopy = {...review}
+        reviewCopy.content = event.target.value
+        setReview(reviewCopy)
     }
 
-    const handleUpdateReview = (gameObj) => {
-        const gameCopy = {...gameObj}
+    const handleUpdateReview = (reviewObj) => {
+        const reviewCopy = {...reviewObj}
         let reviewToEdit = {
-            id : review.id,
-            gameId : gameCopy.id,
-            userPurchasePrice : price,
-            userPlatform : platform,
-            userPlaytime : playtime,
-            completed : checked,
-            graphics : graphics, 
-            story : story,
-            content : content
+            id : reviewCopy.id,
+            gameId : gameId,
+            userPurchasePrice : reviewCopy.userPurchasePrice,
+            userPlatform : reviewCopy.userPlatform,
+            userPlaytime : reviewCopy.userPlaytime,
+            completed : reviewCopy.completed,
+            graphics : reviewCopy.graphics, 
+            story : reviewCopy.story,
+            content : reviewCopy.content
         }
         updateReview(reviewToEdit).then(
-            navigate(`/review/details/${gameCopy.id}`)
+            navigate(`/review/details/${gameId}`)
         )
     }
 
@@ -91,8 +99,8 @@ export const ReviewEdit = () => {
                                 <OutlinedInput
                                     
                                     id="price"
-                                    value={price}
-                                    defaultValue={review.userPurchasePrice}
+                                    value={review.userPurchasePrice}
+                                    
                                     onChange={handlePrice}
                                     startAdornment={<InputAdornment position="start">$</InputAdornment>}
                                 />
@@ -102,12 +110,12 @@ export const ReviewEdit = () => {
                                     Platform
                                 </Typography>
                                 <TextField
-                                    value={platform}
+                                    value={review.userPlatform}
                                     label={null}
                                     id="platform"
                                     variant="standard"
                                     onChange={handlePlatform}
-                                    defaultValue={review.userPlatform}
+                                    
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -116,11 +124,11 @@ export const ReviewEdit = () => {
                                 </Typography>
                                 <TextField
                                     label={null}
-                                    value={playtime}
+                                    value={review.userPlaytime}
                                     // label="Hours"
                                     variant="standard"
                                     id="playtime"
-                                    defaultValue={review.userPlaytime}
+                                    
                                     onChange={handlePlaytime}
                                 />
                             </Grid>
@@ -131,10 +139,9 @@ export const ReviewEdit = () => {
                                     </Typography>
                                     <Slider 
                                         onChange={handleGraphics}
-                                        value={graphics}
+                                        value={parseInt(review.graphics)}
                                         aria-labelledby="graphics_slider"
                                         valueLabelDisplay="auto"
-                                        defaultValue={parseInt(review.graphics)}
                                         size="small"
                                         id="graphics"
                                         step={1}
@@ -146,7 +153,7 @@ export const ReviewEdit = () => {
                             </Grid>
                             <Grid item xs={4}>
                                 <FormGroup>
-                                    <FormControlLabel id="switch" control={<Switch checked={review.completed} value={checked} onChange={handleSwitch}/>} label="Completed"/>
+                                    <FormControlLabel id="switch" control={<Switch checked={review.completed} value={review.completed} onChange={handleSwitch}/>} label="Completed"/>
                                 </FormGroup>
                             </Grid>
                             <Grid item xs={4}>
@@ -158,8 +165,8 @@ export const ReviewEdit = () => {
                                         onChange={handleStory}
                                         aria-labelledby="story_slider"
                                         valueLabelDisplay="auto"
-                                        value={story}
-                                        defaultValue={review.story}
+                                        value={review.story}
+                                        
                                         size="small"
                                         id="story"
                                         step={1}
@@ -176,16 +183,15 @@ export const ReviewEdit = () => {
                                 <TextField 
                                     id="content"
                                     fullWidth
-                                    value={content}
+                                    value={review.content}
                                     multiline
                                     rows={5}
-                                    defaultValue={review.content}
                                     variant="standard"
                                     onChange={handleContent}
                                 />
                             </Grid>
                             <Grid item xs={4}>
-                                <Button onClick={() => handleUpdateReview(game)}>Update</Button>
+                                <Button onClick={() => handleUpdateReview(review)}>Update</Button>
                             </Grid>
 
                         </Grid>
