@@ -42,6 +42,12 @@ namespace GameScript.Controllers
             return Ok(_groupRepository.GetAllUnjoined(userProfileId));
         }
 
+        [HttpGet("Users/{id}")]
+        public IActionResult GetUsers(int groupId)
+        {
+            return Ok(_groupRepository.GetAllUsersByGroup(groupId));
+        }
+
         [HttpPost("Create")]
         public IActionResult CreateGroup(Group group)
         {
