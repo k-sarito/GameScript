@@ -62,7 +62,7 @@ export const GameCard = ({game}) => {
         navigate(`details/${id}`)
     }
     return (
-        <Col sm="6">
+        <Col sm="4">
             <Card>
                 <CardImg top width="100%" src={game.image} alt="cover image"/>
                 <CardBody>

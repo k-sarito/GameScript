@@ -80,7 +80,7 @@ export const RawgList = ({getLoggedInUser}) => {
                 <div className="search--bar">
                     <input type="text" id="searchField" placeholder="Search Games" onChange={handleSearchInput}/>
                     <Button onClick={() => searchGames(search.searchField)}>Go</Button>
-                    <CardColumns>
+                    <CardColumns style={{height: "100vh", overflow: "auto"}}>
                         <Row>                    
                             {games.map(game => <RawgCard game={game} key={game.id} handleSaveGame={handleSaveGame}/>)}                    
                         </Row>

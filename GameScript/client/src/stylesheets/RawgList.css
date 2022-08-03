@@ -1,3 +1,7 @@
 .game--display--full{
     display: flex;
 }
+
+.navItem {
+    color: #fff;
+}
