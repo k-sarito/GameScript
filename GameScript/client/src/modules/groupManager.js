@@ -21,6 +21,16 @@ export const getUnjoinedUserGroups = () => {
     })
 }
 
+export const getAllUsersByGroup = (groupId) => {
+    return getToken().then(token => {
+        return fetch(`${baseUrl}/Users/${groupId}`, {
+            headers : {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(res => res.json())
+    })
+}
+
 export const AddGroup = (groupObj) => {
     return getToken().then(token => {
         return fetch(`${baseUrl}/Create`, {

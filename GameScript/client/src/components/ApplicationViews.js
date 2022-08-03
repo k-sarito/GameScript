@@ -9,6 +9,7 @@ import { ReviewForm } from "./reviews/ReviewForm";
 import { ReviewDetials } from "./reviews/ViewReview";
 import { GroupList } from "./groups/GroupList";
 import { ReviewEdit } from "./reviews/EditReview";
+import { UserList } from "./groups/UserList";
 
 
 
@@ -27,6 +28,7 @@ export default function ApplicationViews({ isLoggedIn, getLoggedInUser }) {
             <Route path="review/details/:gameId" element={<ReviewDetials/>}/>
             <Route path="review/edit/:gameId" element={<ReviewEdit/>}/>
             <Route path="groups" element={<GroupList/>}/>
+            <Route path="groups/members/:groupId" element={<UserList/>}/>
           
         </Route>
         <Route path="login" element={<Login />} />

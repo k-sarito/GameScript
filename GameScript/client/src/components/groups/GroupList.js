@@ -12,38 +12,39 @@ export const GroupList = () => {
     const [isModal, setIsModal] = useState(false)
     const [newName, setNewName] = useState('')
 
-    const [isLoaded, setIsLoaded] = useState(false)
-
-    const getAllGroups = () => {
-        getCurrentUserGroups()
-            .then(res => setJoined(res))
-            .then(() => setIsLoaded(true))
-    }
+    
 
     
 
     useEffect(() => {
         getCurrentUserGroups()
             .then(res => setJoined(res))
-            .then(() => setIsLoaded(true))
+            
     }, [])
 
+    // useEffect(() => {
+    //     let uniqueArr = []
+    //     getUnjoinedUserGroups().then(res => {
+    //         for(let item of res){
+    //             if(!joined.some(element => element.id == item.id)){
+                    
+    //                 uniqueArr.push(item)
+                    
+    //             }
+    //         }
+    //         setUnjoined(uniqueArr)
+    //     })
+    // }, [isLoaded])
     useEffect(() => {
-        let uniqueArr = []
-        getUnjoinedUserGroups().then(res => {
-            for(let item of res){
-                if(!joined.some(element => element.id == item.id)){
-                    console.log(item)
-                    uniqueArr.push(item)
-                    console.log(joined)
-                }
-            }
-            setUnjoined(uniqueArr)
-        })
-    }, [isLoaded])
+        getUnjoinedUserGroups().then(res => setUnjoined(res))
+    }, [])
 
     const handleJoinGroup = (groupId) => {
         JoinGroup(groupId)
+            .then(() => {
+                getCurrentUserGroups().then(res => setJoined(res))
+                getUnjoinedUserGroups().then(res => setUnjoined(res))
+            })
     }
 
     const handleToggle = () => {
@@ -64,10 +65,10 @@ export const GroupList = () => {
         }
         AddGroup(groupToCreate)
             .then(res => {
-                console.log(res)
                 return JoinGroup(res.id)
             })
-            .then(() => getAllGroups())
+            .then(() => getCurrentUserGroups())
+            .then(res => setJoined(res))
         setIsModal(false)
     }
 

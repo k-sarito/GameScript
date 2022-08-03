@@ -51,11 +51,15 @@ namespace GameScript.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT g.Id, g.Name, g.AdminId, up.Id as UserId
+                        SELECT g.Id, g.Name from [Group] as g
+                        LEFT JOIN 
+                        (SELECT g.Id, g.Name
                         FROM [Group] as g
                         LEFT JOIN UserGroup as ug ON ug.GroupId = g.Id
                         LEFT JOIN UserProfile as up ON up.Id = ug.UserId
-                        WHERE up.Id != @id AND g.AdminId != @id";
+                        WHERE up.Id = @id OR g.AdminId = @id
+                        GROUP BY g.Id, g.Name) AS joinedGroups ON joinedGroups.Id = g.Id
+                        WHERE joinedGroups.Id is null";
                     DbUtils.AddParameter(cmd, "@id", userId);
                     var reader = cmd.ExecuteReader();
                     var groups = new List<Group>();
@@ -65,8 +69,7 @@ namespace GameScript.Repositories
                         groups.Add(new Group()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
-                            Name = DbUtils.GetString(reader, "Name"),
-                            AdminId = DbUtils.GetInt(reader, "AdminId")
+                            Name = DbUtils.GetString(reader, "Name")
                         });
                     }
 
