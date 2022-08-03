@@ -76,6 +76,37 @@ namespace GameScript.Repositories
             }
         }
 
+        public List<UserProfile> GetAllUsersByGroup(int groupId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT up.Id, up.UserName
+                        FROM UserProfile as up
+                        JOIN UserGroup as ug ON ug.UserId = up.Id
+                        WHERE ug.GroupId = @id";
+                    DbUtils.AddParameter(cmd, "@id", groupId);
+                    var reader = cmd.ExecuteReader();
+                    var users = new List<UserProfile>();
+
+                    while (reader.Read())
+                    {
+                        users.Add(new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            UserName = DbUtils.GetString(reader, "UserName")
+                        });
+                    }
+
+                    reader.Close();
+                    return users;
+                }
+            }
+        }
+
         public void Add(Group group)
         {
             using (var conn = Connection)

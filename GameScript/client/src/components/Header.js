@@ -59,6 +59,7 @@ export default function Header({ isLoggedIn, getLoggedInUser }) {
                     className="nav-link"
                     style={{ cursor: "pointer" }}
                     onClick={logout}
+                    href="/login"
                   >
                     Logout
                   </a>
