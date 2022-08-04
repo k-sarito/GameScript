@@ -9,6 +9,6 @@ namespace GameScript.Repositories
         void Add(Game game);
         void UpdateProgress(Game game);
         Game GetById(int id);
-        Game GetByRawgId(int id);
+        Game GetByRawgId(int id, int userId);
     }
 }
