@@ -129,42 +129,31 @@ namespace GameScript.Repositories
             }
         }
 
-        public Game GetByRawgId(int id, int userId)
+        public bool GetByRawgId(int id, int userId)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, UserId, RawgGameId, Name, PercentComplete, Released, Image, Rating, Metacritic, Playtime, Esrb, CurrentThoughts 
+                    cmd.CommandText = @"SELECT Id, UserId, RawgGameId, Name
                         FROM Game
                         WHERE RawgGameId = @id AND UserId = @userId";
 
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@userId", userId);
-                    Game game = null;
                     var reader = cmd.ExecuteReader();
 
                     if (reader.Read())
                     {
-                        game = new Game()
-                        {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            UserId = DbUtils.GetInt(reader, "UserId"),
-                            RawgGameId = DbUtils.GetInt(reader, "RawgGameId"),
-                            Name = DbUtils.GetString(reader, "Name"),
-                            PercentComplete = DbUtils.GetInt(reader, "PercentComplete"),
-                            Released = DbUtils.GetDateTime(reader, "Released"),
-                            Image = DbUtils.GetString(reader, "Image"),
-                            Rating = reader.GetDecimal(reader.GetOrdinal("Rating")),
-                            Metacritic = DbUtils.GetInt(reader, "Metacritic"),
-                            Playtime = DbUtils.GetInt(reader, "Playtime"),
-                            Esrb = DbUtils.GetString(reader, "Esrb"),
-                            CurrentThoughts = DbUtils.GetString(reader, "CurrentThoughts")
-                        };
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
                     }
                     reader.Close();
-                    return game;
+                    
                 }
             }
         }

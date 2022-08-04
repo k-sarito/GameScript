@@ -20,6 +20,11 @@ export const getGameById = (id) => {
         .then(res=> res.json())
 }
 
+export const doesGameExist = (id, userId) => {
+    return fetch(`${baseUrl}/DoesGameExist/${id}?userId=${userId}`)
+        .then(res => res.json())
+}
+
 export const updateProgress = (gameObj) => {
     return fetch(`${baseUrl}/${gameObj.id}`,{
         method: "PUT",

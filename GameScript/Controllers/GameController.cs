@@ -31,8 +31,8 @@ namespace GameScript.Controllers
         [HttpGet("DoesGameExist/{id}")]
         public IActionResult DoesGameExist(int id, int userId)
         {
-            var game = _gameRepository.GetByRawgId(id);
-            return Ok(game);
+            
+            return Ok(_gameRepository.GetByRawgId(id, userId));
         }
 
         [HttpPost]

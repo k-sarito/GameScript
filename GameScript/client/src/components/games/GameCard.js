@@ -62,8 +62,8 @@ export const GameCard = ({game}) => {
         navigate(`details/${id}`)
     }
     return (
-        <Col sm="4">
-            <Card>
+        <Col sm="3">
+            <Card style={{margin : '1rem'}}>
                 <CardImg top width="100%" src={game.image} alt="cover image"/>
                 <CardBody>
                     <CardTitle>{game.name}</CardTitle>
@@ -74,7 +74,7 @@ export const GameCard = ({game}) => {
                     <FontAwesomeIcon icon={faAngleDown} onClick={() => toggleDetails()} />
                     <Collapse isOpen={expand}>
                         <CardText>Average Playtime: {game.playtime} hours</CardText>
-                        <CardText>Released: {game.released}</CardText>
+                        <CardText>Released: {game.released.split("T")[0]}</CardText>
                         <CardText>Metacritic: {game.metacritic}</CardText>
                         <CardText>ESRB: {game.esrb}</CardText>
                         <div className="gameCard--icons">

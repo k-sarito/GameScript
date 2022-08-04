@@ -82,7 +82,7 @@ export const RawgList = ({getLoggedInUser}) => {
                     <Button onClick={() => searchGames(search.searchField)}>Go</Button>
                     <CardColumns style={{height: "100vh", overflow: "auto"}}>
                         <Row>                    
-                            {games.map(game => <RawgCard game={game} key={game.id} handleSaveGame={handleSaveGame}/>)}                    
+                            {games.map(game => <RawgCard game={game} key={game.id} currentUser={currentUser} handleSaveGame={handleSaveGame}/>)}                    
                         </Row>
                     </CardColumns>
                 </div>
