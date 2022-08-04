@@ -28,6 +28,12 @@ namespace GameScript.Controllers
             var game = _gameRepository.GetById(id);
             return Ok(game);
         }
+        [HttpGet("DoesGameExist/{id}")]
+        public IActionResult DoesGameExist(int id, int userId)
+        {
+            var game = _gameRepository.GetByRawgId(id);
+            return Ok(game);
+        }
 
         [HttpPost]
         public IActionResult Add(Game game)

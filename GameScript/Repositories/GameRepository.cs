@@ -129,7 +129,7 @@ namespace GameScript.Repositories
             }
         }
 
-        public Game GetByRawgId(int id)
+        public Game GetByRawgId(int id, int userId)
         {
             using (var conn = Connection)
             {
@@ -138,9 +138,10 @@ namespace GameScript.Repositories
                 {
                     cmd.CommandText = @"SELECT Id, UserId, RawgGameId, Name, PercentComplete, Released, Image, Rating, Metacritic, Playtime, Esrb, CurrentThoughts 
                         FROM Game
-                        WHERE RawgGameId = @id";
+                        WHERE RawgGameId = @id AND UserId = @userId";
 
                     cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@userId", userId);
                     Game game = null;
                     var reader = cmd.ExecuteReader();
 
