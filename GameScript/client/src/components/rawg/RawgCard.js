@@ -18,7 +18,7 @@ export const RawgCard = ({game, handleSaveGame}) => {
             <Card>
                 <CardImg top width="100%" src={game.background_image} alt="cover image"/>
                 <CardBody>
-                    <CardTitle>{game.name}</CardTitle>
+                    <CardTitle >{game.name}</CardTitle>
                     <FontAwesomeIcon icon={faAngleDown} onClick={() => toggleDetails()} />
                     <Collapse isOpen={expand}>
                         <CardText>Average Playtime: {game.playtime} hours</CardText>

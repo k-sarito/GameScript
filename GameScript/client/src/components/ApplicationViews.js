@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import { RawgList } from "./rawg/RawgList";
 import { GameList } from "./games/GameList";
+import { FriendGameList } from "./games/FriendGameList";
 import { EditProgress } from "./games/EditProgress";
 import { ReviewForm } from "./reviews/ReviewForm";
 import { ReviewDetials } from "./reviews/ViewReview";
@@ -25,10 +26,11 @@ export default function ApplicationViews({ isLoggedIn, getLoggedInUser }) {
             <Route path="games/details/:gameId" element={<EditProgress/>}/>
             <Route path="games" element={<GameList getLoggedInUser={getLoggedInUser}/>}/>
             <Route path="review/create/:gameId" element={<ReviewForm/>}/>
-            <Route path="review/details/:gameId" element={<ReviewDetials/>}/>
+            <Route path="review/details/:gameId" element={<ReviewDetials getLoggedInUser={getLoggedInUser}/>}/>
             <Route path="review/edit/:gameId" element={<ReviewEdit/>}/>
             <Route path="groups" element={<GroupList/>}/>
             <Route path="groups/members/:groupId" element={<UserList/>}/>
+            <Route path="games/users/:profileId" element={<FriendGameList/>}/>
           
         </Route>
         <Route path="login" element={<Login />} />

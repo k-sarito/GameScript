@@ -116,6 +116,7 @@ export const ReviewEdit = () => {
                                     variant="standard"
                                     onChange={handlePlatform}
                                     
+                                    
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -165,7 +166,7 @@ export const ReviewEdit = () => {
                                         onChange={handleStory}
                                         aria-labelledby="story_slider"
                                         valueLabelDisplay="auto"
-                                        value={review.story}
+                                        value={parseInt(review.story)}
                                         
                                         size="small"
                                         id="story"

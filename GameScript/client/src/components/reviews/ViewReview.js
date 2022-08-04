@@ -6,10 +6,11 @@ import { getGameById } from "../../modules/gameManager";
 import { Container, Grid, TextField, OutlinedInput, InputAdornment, FormGroup, FormControlLabel, Switch, Typography, Slider, InputLabel } from "@mui/material";
 import { Card, CardImg, CardBody, CardTitle, Button, Placeholder } from "reactstrap";
 
-export const ReviewDetials = () => {
+export const ReviewDetials = ({getLoggedInUser}) => {
     const [game, setGame] = useState({})
     const [review, setReview] = useState({})
     const {gameId} = useParams()
+    const [currentUser, setCurrentUser] = useState({})
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -20,8 +21,22 @@ export const ReviewDetials = () => {
         getReviewByGameId(gameId).then(res => setReview(res))
     }, [game])
 
+    useEffect(() => {
+        getLoggedInUser().then(res => setCurrentUser(res))
+    }, [game])
+
     const handleEditNav = (gameId) => {
         navigate(`/review/edit/${gameId}`)
+    }
+
+    const editButtonGenerator = (gameObj) => {
+        let jsx = ''
+        if(gameObj.userId == currentUser.id){
+            jsx = <Button onClick={() => handleEditNav(game.id)}>Edit</Button>
+        } else {
+            jsx = ''
+        }
+        return jsx
     }
 
     return (
@@ -135,7 +150,7 @@ export const ReviewDetials = () => {
                                 />
                             </Grid>
                             <Grid item xs={4}>
-                                <Button onClick={() => handleEditNav(game.id)}>Edit</Button>
+                                {editButtonGenerator(game)}
                             </Grid>
 
                         </Grid>
