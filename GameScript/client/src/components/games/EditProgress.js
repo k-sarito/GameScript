@@ -59,7 +59,7 @@ export const EditProgress = () => {
                     <CardTitle>{game.name}</CardTitle>
                         <Slider
                             id="newProgress"
-                            defaultValue={game.percentComplete}
+                            value={parseInt(game.percentComplete)}
                             aria-label="Default"
                             valueLabelDisplay="auto"
                             onChange={handleProgressChange}

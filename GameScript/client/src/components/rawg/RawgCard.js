@@ -36,7 +36,7 @@ export const RawgCard = ({game, handleSaveGame, currentUser}) => {
     
     return (
         <Col sm="4">
-            <Card>
+            <Card style={{margin : '1rem'}}>
                 <CardImg top width="100%" src={game.background_image} alt="cover image"/>
                 <CardBody>
                     <CardTitle >{game.name}</CardTitle>

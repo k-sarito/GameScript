@@ -16,6 +16,7 @@ export const FriendGameList = ({}) => {
     return (
         <>
             <div className="game--display--full">
+                <h2></h2>
                 <CardColumns>
                     <Row>
                         {games?.map(game => <FriendGameCard game={game} key={game.id}/>)}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from "react";
 import { getAllUsersByGroup } from "../../modules/groupManager";
-import { List, ListItem, ListItemText, Divider } from "@mui/material";
+import { List, ListItem, ListItemText, Divider, Box } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserListItem } from "./UserListItem";
 
@@ -22,9 +22,11 @@ export const UserList = () => {
 
     return (
         <>
+        <Box>
             <List sx={style} component="nav" aria-label="user-list">
                 {members.map(member => { return <UserListItem user={member} key={member.id}/>})}
-            </List> 
+            </List>
+        </Box>
         </>
     )
 }

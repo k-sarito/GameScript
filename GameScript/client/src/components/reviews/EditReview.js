@@ -22,12 +22,18 @@ export const ReviewEdit = () => {
         getReviewByGameId(gameId).then(res => setReview(res))
     }, [game])
 
-    // ? WHY does the update function automatically switch the state of Checked when unclicked?
+    
 
-    const handleSwitch = (event) => {
+    const handleSwitch = () => {
         let reviewCopy = {...review}
-        reviewCopy.completed = event.target.value
-        setReview(reviewCopy)
+
+        if(reviewCopy.completed == false){
+            reviewCopy.completed = true
+            setReview(reviewCopy)
+        } else {
+            reviewCopy.completed = false
+            setReview(reviewCopy)
+        }
     }
 
     const handlePrice = (event) => {
