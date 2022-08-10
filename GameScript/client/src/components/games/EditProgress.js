@@ -18,11 +18,15 @@ export const EditProgress = () => {
     }, [])
 
     const handleProgressChange = (event) => {
-        setNewProgress(event.target.value)
+        let gameCopy = {...game}
+        gameCopy.percentComplete = event.target.value
+        setGame(gameCopy)
     }
 
     const handleThoughtsChange = (event) => {
-        setNewThoughts(event.target.value)
+        let gameCopy = {...game}
+        gameCopy.currentThoughts = event.target.value
+        setGame(gameCopy)
     }
 
     const handleNavigate = () => {
@@ -37,14 +41,14 @@ export const EditProgress = () => {
             userId : gameCopy.userId,
             rawgGameId : gameCopy.rawgGameId,
             name : gameCopy.name,
-            percentComplete : newProgress,
+            percentComplete : gameCopy.percentComplete,
             released : gameCopy.released,
             image : gameCopy.image,
             rating : gameCopy.rating,
             metacritic : gameCopy.metacritic,
             playtime : gameCopy.playtime,
             esrb : gameCopy.esrb,
-            currentThoughts: newThoughts
+            currentThoughts: gameCopy.currentThoughts
         }
         updateProgress(gameToUpdate)
         navigate("/games")
@@ -69,7 +73,7 @@ export const EditProgress = () => {
                                 <Select
                                     labelId="thoughts_select"
                                     id="newThoughts"
-                                    value={newThoughts}
+                                    value={game.currentThoughts}
                                     label="Thoughts"
                                     onChange={handleThoughtsChange}
                                 >
