@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { getAllRawgGames, getRawgByGenre, getRawgByPlatform, getRawgTopRated, getRawgUpcoming, rawgSearch } from "../../modules/rawgManager";
 import { addGame } from "../../modules/gameManager";
 import { RawgCard } from "./RawgCard";
-import {Container, Row, Col, Button} from "reactstrap";
+import {Container, Row, Col, Button, Pagination, PaginationItem, PaginationLink} from "reactstrap";
 import {CardColumns} from "reactstrap";
 import Sidebar from "./Sidebar";
 import "../../stylesheets/RawgList.css"
@@ -14,6 +14,7 @@ export const RawgList = ({getLoggedInUser}) => {
         searchField : ''
     })
     const [currentUser, setCurrentUser] = useState({})
+    const [pageNum, setPageNum] = useState('')
 
     useEffect(() => {
         getLoggedInUser().then(res => setCurrentUser(res))
@@ -49,6 +50,13 @@ export const RawgList = ({getLoggedInUser}) => {
         setSearch(searchCopy)
     }
 
+    const handlePageChange = (event) => {
+        const numCopy = {...pageNum}
+        numCopy[event.target.id] = event.target.value
+        setPageNum(numCopy)
+        console.log(pageNum)
+    }
+
     const handleSaveGame = (gameObj) => {
         const gameCopy = {...gameObj}
         let gameToAdd = {
@@ -80,6 +88,33 @@ export const RawgList = ({getLoggedInUser}) => {
                 <div className="search--bar">
                     <input type="text" id="searchField" placeholder="Search Games" onChange={handleSearchInput}/>
                     <Button onClick={() => searchGames(search.searchField)}>Go</Button>
+                    <Pagination aira-aria-label="navigation">
+                        <PaginationItem>
+                            <PaginationLink onClick={handlePageChange}>
+                            1
+                            </PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink onClick={handlePageChange}>
+                            2
+                            </PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink onClick={handlePageChange}>
+                            3
+                            </PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink onClick={handlePageChange}>
+                            4
+                            </PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink onClick={handlePageChange}>
+                            5
+                            </PaginationLink>
+                        </PaginationItem>
+                    </Pagination>
                     <CardColumns style={{height: "100vh", overflow: "auto"}}>
                         <Row>                    
                             {games.map(game => <RawgCard game={game} key={game.id} currentUser={currentUser} handleSaveGame={handleSaveGame}/>)}                    
