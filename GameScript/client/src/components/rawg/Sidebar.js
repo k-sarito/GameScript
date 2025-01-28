@@ -28,7 +28,7 @@ const Sidebar = ({gamesByGenre, gamesByPlatform, gamesTopRated, gamesUpcoming}) 
             <CDBSidebar textColor="#fff" backgroundColor="#333">
                 <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
                     <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-                    Sidebar
+                    Filters
                     </a>
                 </CDBSidebarHeader>
 
@@ -85,7 +85,7 @@ const Sidebar = ({gamesByGenre, gamesByPlatform, gamesTopRated, gamesUpcoming}) 
                         padding: '20px 5px',
                     }}
                     >
-                    Sidebar Footer
+                    Filters
                     </div>
                 </CDBSidebarFooter>
             </CDBSidebar>

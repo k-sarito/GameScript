@@ -7,8 +7,7 @@ import { getUserByFirebaseId } from './modules/userManager';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const getLoggedInUser = () =>{
-  
+const getLoggedInUser = () =>{  
   const firebaseUserId = getUserByFirebaseId(firebase.auth().currentUser.uid.toString())
   return firebaseUserId
 }
